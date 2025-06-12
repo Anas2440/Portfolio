@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Download, Linkedin, Mail, X } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle, Download, Linkedin, Mail, X } from "lucide-react";
 
 const FloatingWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,22 +8,22 @@ const FloatingWidget = () => {
   const actions = [
     {
       icon: Download,
-      label: 'Download Resume',
-      href: '/resume.pdf',
-      color: 'bg-green-600 hover:bg-green-700'
+      label: "Download Resume",
+      href: "/AnasParekh_iOS_Developer.pdf",
+      color: "bg-green-600 hover:bg-green-700",
     },
     {
       icon: Mail,
-      label: 'Email Me',
-      href: 'mailto:hello@iosdev.com',
-      color: 'bg-blue-600 hover:bg-blue-700'
+      label: "Email Me",
+      href: "mailto:anasparekh5@gmail.com",
+      color: "bg-blue-600 hover:bg-blue-700",
     },
     {
       icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com',
-      color: 'bg-blue-700 hover:bg-blue-800'
-    }
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/anas-parekh-a6ab40242",
+      color: "bg-blue-700 hover:bg-blue-800",
+    },
   ];
 
   return (
@@ -40,15 +40,21 @@ const FloatingWidget = () => {
               <motion.a
                 key={action.label}
                 href={action.href}
-                target={action.href.startsWith('http') ? '_blank' : undefined}
-                rel={action.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target={action.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  action.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`flex items-center space-x-3 px-4 py-3 rounded-full text-white shadow-lg transition-all duration-200 hover:shadow-xl ${action.color}`}
               >
                 <action.icon className="h-5 w-5" />
-                <span className="text-sm font-medium whitespace-nowrap">{action.label}</span>
+                <span className="text-sm font-medium whitespace-nowrap">
+                  {action.label}
+                </span>
               </motion.a>
             ))}
           </motion.div>
@@ -61,7 +67,11 @@ const FloatingWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all duration-200 hover:shadow-xl"
       >
-        {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {isOpen ? (
+          <X className="h-6 w-6" />
+        ) : (
+          <MessageCircle className="h-6 w-6" />
+        )}
       </motion.button>
     </div>
   );

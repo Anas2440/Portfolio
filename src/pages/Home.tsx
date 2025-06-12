@@ -1,33 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Code, Smartphone, Zap, Star, Play } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowRight, Code, Smartphone, Zap, Star, Play } from "lucide-react";
 
 const Home = () => {
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
+    transition: { duration: 0.6 },
   };
 
   const stagger = {
     animate: {
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const technologies = [
-    'Swift', 'UIKit', 'SwiftUI', 'ARKit', 'RealityKit', 'Core Data',
-    'Firebase', 'RxSwift', 'REST APIs', 'Socket.IO', 'In-App Purchases'
+    "Swift",
+    "UIKit",
+    "SwiftUI",
+    "ARKit",
+    "RealityKit",
+    "Core Data",
+    "Firebase",
+    "RxSwift",
+    "REST APIs",
+    "Socket.IO",
+    "In-App Purchases",
   ];
 
   const achievements = [
-    { number: '7+', label: 'iOS Apps Launched' },
-    { number: '5+', label: 'Years Experience' },
-    { number: '50+', label: 'Happy Clients' },
-    { number: '100K+', label: 'App Downloads' }
+    { number: "10+", label: "iOS Apps Launched" },
+    { number: "3+", label: "Years Experience" },
+    { number: "20+", label: "Happy Clients" },
+    { number: "10K+", label: "App Downloads" },
   ];
 
   return (
@@ -38,12 +47,12 @@ const Home = () => {
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-1/4 left-1/4 w-32 h-32 border border-blue-200 dark:border-blue-800 rounded-full opacity-20"
           />
           <motion.div
             animate={{ rotate: -360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             className="absolute bottom-1/4 right-1/4 w-24 h-24 border border-indigo-200 dark:border-indigo-800 rounded-full opacity-20"
           />
         </div>
@@ -67,17 +76,18 @@ const Home = () => {
                   <Smartphone className="h-4 w-4 mr-2" />
                   Available for new projects
                 </motion.div>
-                
+
                 <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                   Crafting Exceptional
                   <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                     iOS Experiences
                   </span>
                 </h1>
-                
+
                 <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  With Swift, UIKit, RealityKit & Beyond. 5+ years crafting cutting-edge iOS applications
-                  across AR, HealthTech, Subscriptions, and Firebase integration.
+                  With Swift, UIKit, RealityKit & Beyond. 3+ years crafting
+                  cutting-edge iOS applications across AR, HealthTech,
+                  Subscriptions, and Firebase integration.
                 </p>
               </motion.div>
 
@@ -89,21 +99,24 @@ const Home = () => {
                   View Portfolio
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                
+
                 <Link
                   to="/contact"
                   className="inline-flex items-center px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-semibold rounded-lg hover:border-blue-600 dark:hover:border-blue-400 transition-all duration-200 transform hover:scale-105"
                 >
                   Let's Talk
                 </Link>
-                
+
                 <button className="inline-flex items-center px-6 py-4 text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
                   <Play className="mr-2 h-5 w-5" />
                   Watch Demo
                 </button>
               </motion.div>
 
-              <motion.div variants={fadeIn} className="grid grid-cols-4 gap-6 pt-8">
+              <motion.div
+                variants={fadeIn}
+                className="grid grid-cols-4 gap-6 pt-8"
+              >
                 {achievements.map((achievement, index) => (
                   <motion.div
                     key={achievement.label}
@@ -135,7 +148,7 @@ const Home = () => {
                 <div className="w-full h-full bg-gradient-to-br from-blue-400 to-indigo-600 rounded-[2.5rem] overflow-hidden relative">
                   {/* Notch */}
                   <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-16 h-6 bg-black rounded-full" />
-                  
+
                   {/* Screen Content */}
                   <div className="pt-12 p-6 h-full flex flex-col justify-between text-white">
                     <div>
@@ -146,20 +159,24 @@ const Home = () => {
                           <div className="w-6 h-2 bg-white rounded-sm" />
                         </div>
                       </div>
-                      
+
                       <div className="space-y-4">
                         <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                           <Code className="h-8 w-8 mb-2" />
-                          <div className="text-sm font-medium">Swift Development</div>
+                          <div className="text-sm font-medium">
+                            Swift Development
+                          </div>
                         </div>
-                        
+
                         <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                           <Zap className="h-8 w-8 mb-2" />
-                          <div className="text-sm font-medium">ARKit Integration</div>
+                          <div className="text-sm font-medium">
+                            ARKit Integration
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* App Icons */}
                     <div className="grid grid-cols-4 gap-3">
                       {[...Array(8)].map((_, i) => (
@@ -186,7 +203,7 @@ const Home = () => {
               >
                 <Star className="h-6 w-6 text-yellow-500" />
               </motion.div>
-              
+
               <motion.div
                 animate={{ y: [10, -10, 10] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
@@ -254,7 +271,8 @@ const Home = () => {
               Ready to Build Something Amazing?
             </h2>
             <p className="text-xl text-blue-100">
-              Let's discuss your iOS project and bring your vision to life with cutting-edge technology.
+              Let's discuss your iOS project and bring your vision to life with
+              cutting-edge technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

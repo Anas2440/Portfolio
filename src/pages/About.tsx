@@ -1,71 +1,108 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Download, Calendar, Award, Code, Heart, Lightbulb } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Download,
+  Calendar,
+  Award,
+  Code,
+  Heart,
+  Lightbulb,
+} from "lucide-react";
 
 const About = () => {
   const timeline = [
     {
-      year: '2019',
-      title: 'Started iOS Development Journey',
-      description: 'Began learning Swift and iOS development fundamentals',
-      icon: Code
+      year: "2019",
+      title: "Started iOS Development Journey",
+      description: "Began learning Swift and iOS development fundamentals",
+      icon: Code,
     },
     {
-      year: '2020',
-      title: 'First App Store Release',
-      description: 'Launched my first iOS app - a productivity tool that gained 10K+ downloads',
-      icon: Award
+      year: "2020",
+      title: "First App Store Release",
+      description:
+        "Launched my first iOS app - a productivity tool that gained 10K+ downloads",
+      icon: Award,
     },
     {
-      year: '2021',
-      title: 'Specialized in AR Development',
-      description: 'Dove deep into ARKit and RealityKit, creating immersive experiences',
-      icon: Lightbulb
+      year: "2021",
+      title: "Specialized in AR Development",
+      description:
+        "Dove deep into ARKit and RealityKit, creating immersive experiences",
+      icon: Lightbulb,
     },
     {
-      year: '2022',
-      title: 'Freelance iOS Developer',
-      description: 'Started taking on client projects, focusing on complex AR and Firebase integrations',
-      icon: Heart
+      year: "2022",
+      title: "Freelance iOS Developer",
+      description:
+        "Started taking on client projects, focusing on complex AR and Firebase integrations",
+      icon: Heart,
     },
     {
-      year: '2023',
-      title: 'Senior iOS Developer',
-      description: 'Joined a leading HealthTech company, architecting large-scale iOS applications',
-      icon: Award
+      year: "2023",
+      title: "Senior iOS Developer",
+      description:
+        "Joined a leading HealthTech company, architecting large-scale iOS applications",
+      icon: Award,
     },
     {
-      year: '2024',
-      title: '7+ Apps Launched',
-      description: 'Successfully delivered multiple apps across various domains with 100K+ combined downloads',
-      icon: Code
-    }
+      year: "2024",
+      title: "7+ Apps Launched",
+      description:
+        "Successfully delivered multiple apps across various domains with 100K+ combined downloads",
+      icon: Code,
+    },
   ];
 
   const skills = [
-    'Swift', 'UIKit', 'SwiftUI', 'ARKit', 'RealityKit', 'Core Data',
-    'Firebase', 'RxSwift', 'Combine', 'REST APIs', 'Socket.IO', 'CloudKit',
-    'HealthKit', 'WatchKit', 'In-App Purchases', 'StoreKit', 'Core Animation',
-    'Metal', 'SceneKit', 'LiDAR', 'Core ML', 'Vision Framework', 'Biometrics',
-    'Push Notifications', 'Background Tasks', 'Unit Testing', 'UI Testing'
+    "Swift",
+    "UIKit",
+    "SwiftUI",
+    "ARKit",
+    "RealityKit",
+    "Core Data",
+    "Firebase",
+    "RxSwift",
+    "Combine",
+    "REST APIs",
+    "Socket.IO",
+    "CloudKit",
+    "HealthKit",
+    "WatchKit",
+    "In-App Purchases",
+    "StoreKit",
+    "Core Animation",
+    "Metal",
+    "SceneKit",
+    "LiDAR",
+    "Core ML",
+    "Vision Framework",
+    "Biometrics",
+    "Push Notifications",
+    "Background Tasks",
+    "Unit Testing",
+    "UI Testing",
   ];
 
   const values = [
     {
-      title: 'Clean Code',
-      description: 'I believe in writing maintainable, well-documented code that follows SOLID principles and iOS best practices.',
-      icon: Code
+      title: "Clean Code",
+      description:
+        "I believe in writing maintainable, well-documented code that follows SOLID principles and iOS best practices.",
+      icon: Code,
     },
     {
-      title: 'User-Focused Design',
-      description: 'Every app I build prioritizes user experience, ensuring intuitive interfaces and smooth interactions.',
-      icon: Heart
+      title: "User-Focused Design",
+      description:
+        "Every app I build prioritizes user experience, ensuring intuitive interfaces and smooth interactions.",
+      icon: Heart,
     },
     {
-      title: 'Continuous Learning',
-      description: 'The iOS ecosystem evolves rapidly. I stay current with the latest technologies and Apple guidelines.',
-      icon: Lightbulb
-    }
+      title: "Continuous Learning",
+      description:
+        "The iOS ecosystem evolves rapidly. I stay current with the latest technologies and Apple guidelines.",
+      icon: Lightbulb,
+    },
   ];
 
   return (
@@ -79,13 +116,12 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                About Me
-              </h1>
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6">About Me</h1>
               <p className="text-xl text-blue-100 mb-8">
-                I'm a passionate iOS developer with 5+ years of experience crafting exceptional mobile experiences.
-                From learning Swift to launching 7+ iOS apps, my journey has been driven by curiosity and dedication
-                to creating apps that users love.
+                I'm a passionate iOS developer with 3+ years of experience
+                crafting exceptional mobile experiences. From learning Swift to
+                launching 10+ iOS apps, my journey has been driven by curiosity
+                and dedication to creating apps that users love.
               </p>
               <button className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105">
                 <Download className="h-5 w-5 mr-2" />
@@ -101,12 +137,12 @@ const About = () => {
             >
               <div className="relative mx-auto w-80 h-80 rounded-full overflow-hidden border-8 border-white/20">
                 <img
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/assets/img/gallery/Snapchat-380952888.jpg"
                   alt="iOS Developer"
                   className="w-full h-full object-cover"
                 />
               </div>
-              
+
               {/* Floating Elements */}
               <motion.div
                 animate={{ y: [-10, 10, -10] }}
@@ -115,7 +151,7 @@ const About = () => {
               >
                 <Code className="h-8 w-8 text-blue-600" />
               </motion.div>
-              
+
               <motion.div
                 animate={{ y: [10, -10, 10] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
@@ -176,7 +212,7 @@ const About = () => {
           <div className="relative">
             {/* Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200 dark:bg-blue-800"></div>
-            
+
             <div className="space-y-12">
               {timeline.map((item, index) => (
                 <motion.div
@@ -185,9 +221,15 @@ const About = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                  className={`flex items-center ${
+                    index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                  }`}
                 >
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
+                  <div
+                    className={`w-1/2 ${
+                      index % 2 === 0 ? "pr-8 text-right" : "pl-8"
+                    }`}
+                  >
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                       <div className="flex items-center space-x-3 mb-3">
                         <div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
@@ -207,12 +249,12 @@ const About = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Timeline Dot */}
                   <div className="relative flex items-center justify-center w-8 h-8 bg-blue-600 rounded-full border-4 border-white dark:border-gray-900 z-10">
                     <Calendar className="h-4 w-4 text-white" />
                   </div>
-                  
+
                   <div className="w-1/2"></div>
                 </motion.div>
               ))}
@@ -258,10 +300,18 @@ const About = () => {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: '7+', label: 'Apps Launched', color: 'text-blue-600' },
-              { number: '100K+', label: 'Downloads', color: 'text-green-600' },
-              { number: '50+', label: 'Happy Clients', color: 'text-purple-600' },
-              { number: '5+', label: 'Years Experience', color: 'text-orange-600' }
+              { number: "7+", label: "Apps Launched", color: "text-blue-600" },
+              { number: "100K+", label: "Downloads", color: "text-green-600" },
+              {
+                number: "50+",
+                label: "Happy Clients",
+                color: "text-purple-600",
+              },
+              {
+                number: "5+",
+                label: "Years Experience",
+                color: "text-orange-600",
+              },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -293,8 +343,9 @@ const About = () => {
             Let's Create Something Amazing Together
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            I'm always excited to work on challenging iOS projects. Whether you need AR integration,
-            Firebase backends, or beautiful UI/UX, I'm here to help bring your vision to life.
+            I'm always excited to work on challenging iOS projects. Whether you
+            need AR integration, Firebase backends, or beautiful UI/UX, I'm here
+            to help bring your vision to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -303,10 +354,17 @@ const About = () => {
             >
               Start a Project
             </a>
-            <button className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105">
-              <Download className="h-5 w-5 mr-2" />
-              Download Resume
-            </button>
+            <a
+              key={"Download Resume"}
+              href={"/AnasParekh_iOS_Developer.pdf"}
+              target={undefined}
+              rel={undefined}
+            >
+              <button className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105">
+                <Download className="h-5 w-5 mr-2" />
+                Download Resume
+              </button>
+            </a>
           </div>
         </motion.section>
       </div>

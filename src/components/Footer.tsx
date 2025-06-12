@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Github, Linkedin, Mail, Twitter, Smartphone } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Github, Linkedin, Mail, Twitter, Smartphone } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -13,39 +13,40 @@ const Footer = () => {
               <div className="p-2 bg-blue-600 rounded-lg">
                 <Smartphone className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold">iOS Developer</span>
+              <span className="text-xl font-bold">Anas Parekh</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Crafting exceptional iOS experiences with Swift, UIKit, RealityKit & Beyond. 
-              7+ years of iOS development expertise across AR, HealthTech, and more.
+              Crafting exceptional iOS experiences with Swift, UIKit, RealityKit
+              & Beyond. 3+ years of iOS development expertise across AR,
+              HealthTech, and more.
             </p>
             <div className="flex space-x-4">
-              <a
+              {/* <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               >
                 <Github className="h-5 w-5" />
-              </a>
+              </a> */}
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/anas-parekh-a6ab40242"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a
+              {/* <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               >
                 <Twitter className="h-5 w-5" />
-              </a>
+              </a> */}
               <a
-                href="mailto:hello@iosdev.com"
+                href="mailto:anasparekh5@gmail.com"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               >
                 <Mail className="h-5 w-5" />
@@ -58,22 +59,34 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link
+                  to="/portfolio"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link
+                  to="/about"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
                   About Me
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link
+                  to="/services"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link
+                  to="/blog"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
                   Blog
                 </Link>
               </li>
@@ -97,10 +110,16 @@ const Footer = () => {
             © 2025 iOS Developer Portfolio. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/contact" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+            <Link
+              to="/contact"
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+            >
               Privacy Policy
             </Link>
-            <Link to="/contact" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+            <Link
+              to="/contact"
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+            >
               Terms of Service
             </Link>
           </div>

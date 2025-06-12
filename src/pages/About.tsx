@@ -8,6 +8,7 @@ import {
   Heart,
   Lightbulb,
 } from "lucide-react";
+import avtar from "../../assets/img/logo/Snapchat-1742800486-EDIT.jpg";
 
 const About = () => {
   const timeline = [
@@ -137,7 +138,7 @@ const About = () => {
             >
               <div className="relative mx-auto w-80 h-80 rounded-full overflow-hidden border-8 border-white/20">
                 <img
-                  src="/Snapchat-1742800486-EDIT.jpg"
+                  src={avtar}
                   alt="iOS Developer"
                   className="w-full h-full object-cover"
                 />

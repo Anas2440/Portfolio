@@ -137,7 +137,7 @@ const About = () => {
             >
               <div className="relative mx-auto w-80 h-80 rounded-full overflow-hidden border-8 border-white/20">
                 <img
-                  src="/assets/img/logo/Snapchat-1742800486-EDIT.jpg"
+                  src="/Snapchat-1742800486-EDIT.jpg"
                   alt="iOS Developer"
                   className="w-full h-full object-cover"
                 />

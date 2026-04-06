@@ -1,144 +1,142 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Menu, X, Moon, Sun, Smartphone } from "lucide-react";
-import { useTheme } from "../contexts/ThemeContext";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const navItems = [
+  { label: 'Experience', href: '#about' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Expertise', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
-  const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Pricing", path: "/pricing" },
-    { name: "Testimonials", path: "/testimonials" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
-  ];
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (href === '#') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <>
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled ? 'rgba(8,8,9,0.75)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(28px) saturate(1.8)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(28px) saturate(1.8)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
+        }}
+      >
+        <nav className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-              className="p-2 bg-blue-600 rounded-lg"
-            >
-              <Smartphone className="h-6 w-6 text-white" />
-            </motion.div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              Anas Parekh
-            </span>
-          </Link>
+          <a
+            href="#"
+            onClick={e => scrollTo(e, '#')}
+            className="text-[15px] font-semibold tracking-tight text-white/90 hover:text-white transition-colors"
+          >
+            Anas <span className="text-apple-blue">Parekh</span>
+          </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === item.path
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                }`}
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map(item => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={e => scrollTo(e, item.href)}
+                className="relative px-3.5 py-2 text-[13.5px] font-medium rounded-lg text-muted hover:text-white transition-colors duration-200 hover:bg-white/[0.05]"
               >
-                {item.name}
-                {location.pathname === item.path && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"
-                  />
-                )}
-              </Link>
-            ))}
-
-            {/* Theme Toggle */}
-            {/* <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-            >
-              {isDark ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button> */}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-            >
-              {isDark ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-            >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "auto" : 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-white dark:bg-gray-900 border-t dark:border-gray-700"
-        >
-          <div className="py-4 space-y-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === item.path
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
-              >
-                {item.name}
-              </Link>
+                {item.label}
+              </a>
             ))}
           </div>
-        </motion.div>
-      </div>
-    </nav>
+
+          {/* CTA + burger */}
+          <div className="flex items-center gap-2">
+            <a
+              href="/AnasParekh_iOS_Developer.pdf"
+              download
+              className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold rounded-full transition-all duration-200"
+              style={{
+                background: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'rgba(255,255,255,0.85)',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.13)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)';
+              }}
+            >
+              Résumé ↓
+            </a>
+
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setMobileOpen(o => !o)}
+              className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-white/70 hover:text-white hover:bg-white/[0.07] transition-all"
+            >
+              {mobileOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: EASE }}
+            className="fixed top-14 left-0 right-0 z-40 px-4 py-3"
+            style={{
+              background: 'rgba(8,8,9,0.9)',
+              backdropFilter: 'blur(28px)',
+              borderBottom: '1px solid rgba(255,255,255,0.07)',
+            }}
+          >
+            {navItems.map((item, i) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                onClick={e => scrollTo(e, item.href)}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.05] transition-all"
+              >
+                {item.label}
+              </motion.a>
+            ))}
+            <div className="mt-3 pt-3 border-t border-white/[0.06]">
+              <a
+                href="/AnasParekh_iOS_Developer.pdf"
+                download
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white/80"
+                style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.09)' }}
+              >
+                Download Résumé
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

@@ -1,37 +1,75 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import FloatingWidget from "./components/FloatingWidget";
-import Home from "./pages/Home";
-import Portfolio from "./pages/Portfolio";
-import ProjectDetail from "./pages/ProjectDetail";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Pricing from "./pages/Pricing";
-import Testimonials from "./pages/Testimonials";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from './contexts/ThemeContext';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import FloatingWidget from './components/FloatingWidget';
+import CustomCursor from './components/CustomCursor';
+import Home from './pages/Home';
+
+/** Hides the native cursor so our custom one takes over */
+const useCursorStyle = () => {
+  useEffect(() => {
+    document.body.style.cursor = 'none';
+    return () => { document.body.style.cursor = ''; };
+  }, []);
+};
+
+const pageVariants = {
+  initial: { opacity: 0, y: 18 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
+  exit: {
+    opacity: 0,
+    y: -12,
+    transition: { duration: 0.3, ease: [0.4, 0, 1, 1] },
+  },
+};
+
+/** Wraps each routed page in the shared transition */
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <motion.div
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <Home />
+            </motion.div>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 function App() {
+  useCursorStyle();
+
   return (
     <ThemeProvider>
       <Router>
-        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        {/* Premium custom cursor overlay */}
+        <CustomCursor />
+
+        <div
+          className="min-h-screen bg-[#080809]"
+          style={{ cursor: 'none' }}
+        >
           <Navbar />
           <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/portfolio/:id" element={<ProjectDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/testimonials" element={<Testimonials />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-            </Routes>
+            <AnimatedRoutes />
           </main>
           <Footer />
           <FloatingWidget />

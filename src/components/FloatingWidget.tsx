@@ -65,7 +65,7 @@ const FloatingWidget = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all duration-200 hover:shadow-xl"
+        className="p-4 bg-apple-blue hover:bg-blue-400 text-white rounded-full shadow-[0_0_20px_rgba(41,151,255,0.4)] transition-all duration-200 hover:shadow-[0_0_25px_rgba(41,151,255,0.6)]"
       >
         {isOpen ? (
           <X className="h-6 w-6" />

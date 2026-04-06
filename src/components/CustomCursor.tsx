@@ -14,16 +14,16 @@ const CustomCursor = () => {
   const [visible, setVisible] = useState(false);
 
   // Stiff spring for the dot
-  const dotX = useSpring(-100, { stiffness: 900, damping: 45 });
-  const dotY = useSpring(-100, { stiffness: 900, damping: 45 });
+  const dotX = useSpring(-100, { stiffness: 1200, damping: 38, mass: 0.2 });
+  const dotY = useSpring(-100, { stiffness: 1200, damping: 38, mass: 0.2 });
 
-  // Soft spring for the ring
-  const ringX = useSpring(-100, { stiffness: 200, damping: 30 });
-  const ringY = useSpring(-100, { stiffness: 200, damping: 30 });
+  // Faster spring for the ring so it doesn't feel delayed
+  const ringX = useSpring(-100, { stiffness: 520, damping: 28, mass: 0.35 });
+  const ringY = useSpring(-100, { stiffness: 520, damping: 28, mass: 0.35 });
 
-  // Spotlight (very lazy)
-  const spotX = useSpring(-300, { stiffness: 60, damping: 18 });
-  const spotY = useSpring(-300, { stiffness: 60, damping: 18 });
+  // Spotlight remains softer, but should still keep up with the cursor
+  const spotX = useSpring(-300, { stiffness: 180, damping: 24, mass: 0.6 });
+  const spotY = useSpring(-300, { stiffness: 180, damping: 24, mass: 0.6 });
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -52,7 +52,17 @@ const CustomCursor = () => {
         setHovering(true);
       }
     };
-    const onHoverEnd = () => setHovering(false);
+    const onHoverEnd = (e: MouseEvent) => {
+      const nextTarget = e.relatedTarget as HTMLElement | null;
+      if (
+        nextTarget?.closest('a') ||
+        nextTarget?.closest('button') ||
+        nextTarget?.closest('[data-cursor-hover]')
+      ) {
+        return;
+      }
+      setHovering(false);
+    };
 
     window.addEventListener('mousemove', onMove);
     document.addEventListener('mouseenter', onEnter);
@@ -118,12 +128,12 @@ const CustomCursor = () => {
       >
         <motion.div
           animate={{
-            width: hovering ? 44 : clicking ? 28 : 32,
-            height: hovering ? 44 : clicking ? 28 : 32,
-            opacity: hovering ? 0.3 : 0.55,
+            width: hovering ? 40 : clicking ? 26 : 30,
+            height: hovering ? 40 : clicking ? 26 : 30,
+            opacity: hovering ? 0.38 : 0.58,
             borderColor: hovering ? 'rgba(41,151,255,0.9)' : 'rgba(255,255,255,0.6)',
           }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
           style={{
             borderRadius: '50%',
             border: '1px solid rgba(255,255,255,0.55)',

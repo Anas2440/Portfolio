@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import resumePdf from '../../AnasParekh.pdf';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -33,9 +34,9 @@ const Navbar = () => {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled ? 'rgba(8,8,9,0.75)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(28px) saturate(1.8)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(28px) saturate(1.8)' : 'none',
+          background: scrolled ? 'rgba(8,16,28,0.52)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(28px) saturate(1.5)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(28px) saturate(1.5)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
         }}
       >
@@ -46,7 +47,7 @@ const Navbar = () => {
             onClick={e => scrollTo(e, '#')}
             className="text-[15px] font-semibold tracking-tight text-white/90 hover:text-white transition-colors"
           >
-            Anas <span className="text-apple-blue">Parekh</span>
+            Anas <span className="text-[#f4c46c]">Parekh</span>
           </a>
 
           {/* Desktop links */}
@@ -56,7 +57,7 @@ const Navbar = () => {
                 key={item.label}
                 href={item.href}
                 onClick={e => scrollTo(e, item.href)}
-                className="relative px-3.5 py-2 text-[13.5px] font-medium rounded-lg text-muted hover:text-white transition-colors duration-200 hover:bg-white/[0.05]"
+                className="relative px-3.5 py-2 text-[13.5px] font-medium rounded-full text-muted hover:text-white transition-colors duration-200 hover:bg-white/[0.05]"
               >
                 {item.label}
               </a>
@@ -66,19 +67,20 @@ const Navbar = () => {
           {/* CTA + burger */}
           <div className="flex items-center gap-2">
             <a
-              href="/AnasParekh_iOS_Developer.pdf"
-              download
+              href={resumePdf}
+              download="AnasParekh.pdf"
               className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold rounded-full transition-all duration-200"
               style={{
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: 'rgba(255,255,255,0.85)',
+                background: 'linear-gradient(135deg, rgba(244,196,108,0.16), rgba(255,255,255,0.05))',
+                border: '1px solid rgba(244,196,108,0.22)',
+                color: 'rgba(255,248,232,0.92)',
+                boxShadow: '0 12px 30px rgba(244,196,108,0.12)',
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.13)';
+                (e.currentTarget as HTMLElement).style.background = 'linear-gradient(135deg, rgba(244,196,108,0.22), rgba(255,255,255,0.08))';
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)';
+                (e.currentTarget as HTMLElement).style.background = 'linear-gradient(135deg, rgba(244,196,108,0.16), rgba(255,255,255,0.05))';
               }}
             >
               Résumé ↓
@@ -105,7 +107,7 @@ const Navbar = () => {
             transition={{ duration: 0.22, ease: EASE }}
             className="fixed top-14 left-0 right-0 z-40 px-4 py-3"
             style={{
-              background: 'rgba(8,8,9,0.9)',
+              background: 'rgba(8,16,28,0.86)',
               backdropFilter: 'blur(28px)',
               borderBottom: '1px solid rgba(255,255,255,0.07)',
             }}
@@ -125,8 +127,8 @@ const Navbar = () => {
             ))}
             <div className="mt-3 pt-3 border-t border-white/[0.06]">
               <a
-                href="/AnasParekh_iOS_Developer.pdf"
-                download
+                href={resumePdf}
+                download="AnasParekh.pdf"
                 className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white/80"
                 style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.09)' }}
               >

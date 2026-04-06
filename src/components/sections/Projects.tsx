@@ -1,61 +1,11 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { ArrowUpRight, Tag } from 'lucide-react';
+import { projects } from '../../data/resumeData';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-type Project = {
-  title: string;
-  type: string;
-  description: string;
-  tags: string[];
-  link: string;
-  accent: string;
-  highlight: string;
-};
-
-const projects: Project[] = [
-  {
-    title: 'AR Fitness Tracker',
-    type: 'HealthTech',
-    description:
-      'Real-time AR workout tracking with live metric overlays powered by ARKit and CoreML. Reduces injury risk by coaching form through body-pose estimation.',
-    tags: ['Swift', 'ARKit', 'CoreML'],
-    link: '#',
-    accent: 'rgba(52,211,153,0.06)',
-    highlight: '#34d399',
-  },
-  {
-    title: 'FinMate Widget',
-    type: 'Finance',
-    description:
-      'Daily expense tracking in a beautiful home-screen widget. Users never open the app — WidgetKit does the heavy lifting with CoreData sync.',
-    tags: ['SwiftUI', 'WidgetKit', 'CoreData'],
-    link: '#',
-    accent: 'rgba(251,191,36,0.06)',
-    highlight: '#fbbf24',
-  },
-  {
-    title: 'Social Connect',
-    type: 'Social',
-    description:
-      'Voice-first social platform with sub-100ms latency streaming. Firebase Realtime Database drives presence, while AVFoundation handles audio capture.',
-    tags: ['RxSwift', 'Firebase', 'AVFoundation'],
-    link: '#',
-    accent: 'rgba(167,139,250,0.06)',
-    highlight: '#a78bfa',
-  },
-  {
-    title: 'Creator Studio',
-    type: 'Productivity',
-    description:
-      'iPad-native storyboarding canvas for video creators. PencilKit-powered planning, Combine state management, and App of the Day recognition on the App Store.',
-    tags: ['UIKit', 'Combine', 'PencilKit'],
-    link: '#',
-    accent: 'rgba(41,151,255,0.06)',
-    highlight: '#2997ff',
-  },
-];
+type Project = (typeof projects)[number];
 
 /** Clamps a value between min and max */
 const clamp = (v: number, min: number, max: number) =>
@@ -187,7 +137,7 @@ const TiltCard = ({
               {project.type}
             </span>
             <motion.a
-              href={project.link}
+              href="#contact"
               animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.75 }}
               transition={{ duration: 0.22 }}
               className="flex items-center gap-1 text-xs font-semibold"
@@ -250,34 +200,47 @@ const Projects = () => {
 
   return (
     <section id="projects" ref={sectionRef} className="py-28 relative">
+      <motion.div
+        style={{ y: useSpring(useTransform(scrollYProgress, [0, 1], [-20, 36]), { stiffness: 50, damping: 18 }) }}
+        className="orb w-[560px] h-[560px] right-0 top-24 translate-x-1/3 bg-[#f4c46c]/[0.05]"
+      />
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header with parallax */}
-        <motion.div
-          style={{ y: headerY }}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 24 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mb-16"
-        >
-          <p className="section-label mb-4">Selected Work</p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight leading-tight">
-              Things I've built
-            </h2>
-            <p className="text-subdued text-base max-w-xs leading-relaxed md:text-right">
-              A curated set of iOS apps shipped to the App Store.
-            </p>
+        <div className="world-shell glass-card noise p-8 md:p-10 lg:p-12">
+          <motion.div
+            style={{ y: headerY }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 24 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="mb-16"
+          >
+            <p className="section-label mb-4">Selected Work</p>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div className="max-w-2xl">
+                <h2 className="font-display text-[clamp(2.4rem,5vw,4.2rem)] tracking-tight leading-[0.98]">
+                  Spaces I’ve built for other people to live inside.
+                </h2>
+                <p className="text-subdued text-base max-w-xl leading-relaxed mt-4">
+                  From private communities to fashion operations and AI interfaces, these projects were
+                  built to feel useful, tactile, and emotionally clear.
+                </p>
+              </div>
+              <div className="video-panel rounded-[26px] border border-white/10 px-5 py-4 max-w-sm">
+                <div className="text-[10px] uppercase tracking-[0.22em] text-[#f4c46c]">Project Mood</div>
+                <p className="mt-3 text-sm leading-relaxed text-white/80">
+                  Clean flows, fast interactions, and surfaces that feel calm under pressure.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <hr className="divider mb-16" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {projects.map((project, index) => (
+              <TiltCard key={project.title} project={project} index={index} />
+            ))}
           </div>
-        </motion.div>
-
-        <hr className="divider mb-16" />
-
-        {/* 3D tilt grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((project, index) => (
-            <TiltCard key={project.title} project={project} index={index} />
-          ))}
         </div>
       </div>
     </section>

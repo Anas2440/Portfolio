@@ -1,13 +1,15 @@
 import React, { useState, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { Send, CheckCircle2, Linkedin, Mail, ArrowUpRight, Phone, Globe, MapPin } from 'lucide-react';
+import { profile } from '../../data/resumeData';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const socials = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anas-parekh-a6ab40242', icon: Linkedin },
-  { label: 'Email', href: 'mailto:anasparekh5@gmail.com', icon: Mail },
-  { label: 'GitHub', href: '#', icon: Github },
+  { label: 'LinkedIn', href: profile.linkedin, icon: Linkedin },
+  { label: 'Email', href: `mailto:${profile.email}`, icon: Mail },
+  { label: 'Phone', href: `tel:${profile.phone.replace(/\s+/g, '')}`, icon: Phone },
+  { label: 'Website', href: profile.website, icon: Globe },
 ];
 
 type FormState = 'idle' | 'loading' | 'success';
@@ -33,9 +35,10 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-28 relative overflow-hidden">
       {/* Ambient */}
-      <div className="orb w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-apple-blue/[0.06]" />
+      <div className="orb w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4c46c]/[0.06]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="world-shell glass-card noise p-8 md:p-10 lg:p-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-start">
           
           {/* ── Left column: copy ── */}
@@ -46,12 +49,28 @@ const ContactSection = () => {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <p className="section-label mb-4">Contact</p>
-            <h2 className="text-[clamp(2rem,5vw,3.25rem)] font-bold tracking-tight leading-tight mb-5">
-              Let's build something great.
+            <h2 className="font-display text-[clamp(2.4rem,5vw,4rem)] tracking-tight leading-[0.98] mb-5">
+              Enter the conversation, not the funnel.
             </h2>
             <p className="text-subdued text-base leading-relaxed mb-10 max-w-sm">
-              Have an iOS project in mind? Let's talk. I typically respond within 24 hours.
+              Based in {profile.location}. If you have an iOS product, client build, or collaboration idea,
+              let’s make it feel honest, alive, and beautifully built.
             </p>
+
+            <div className="mb-8 space-y-3">
+              <div className="flex items-center gap-3 text-sm text-white/75">
+                <MapPin className="w-4 h-4 text-apple-blue/80" />
+                <span>{profile.location}</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-white/75">
+                <Mail className="w-4 h-4 text-apple-blue/80" />
+                <span>{profile.email}</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-white/75">
+                <Phone className="w-4 h-4 text-apple-blue/80" />
+                <span>{profile.phone}</span>
+              </div>
+            </div>
 
             {/* Socials */}
             <div className="space-y-3">
@@ -61,10 +80,9 @@ const ContactSection = () => {
                   href={href}
                   target={href.startsWith('http') ? '_blank' : undefined}
                   rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between px-4 py-3 rounded-xl group transition-colors duration-200"
+                  className="flex items-center justify-between px-4 py-3 rounded-xl group transition-colors duration-200 video-panel border border-white/10"
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    boxShadow: '0 14px 40px rgba(0,0,0,0.18)',
                   }}
                 >
                   <div className="flex items-center gap-3">
@@ -90,12 +108,9 @@ const ContactSection = () => {
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
           >
             <div
-              className="rounded-2xl p-8 sm:p-10 relative overflow-hidden"
+              className="video-panel rounded-[30px] p-8 sm:p-10 relative overflow-hidden border border-white/10"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                backdropFilter: 'blur(24px)',
-                boxShadow: '0 4px 32px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset',
+                boxShadow: '0 20px 70px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.04) inset',
               }}
             >
               {/* Top glow line */}
@@ -234,6 +249,7 @@ const ContactSection = () => {
               </AnimatePresence>
             </div>
           </motion.div>
+        </div>
         </div>
       </div>
     </section>

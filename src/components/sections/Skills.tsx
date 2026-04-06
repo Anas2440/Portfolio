@@ -1,32 +1,9 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
+import { coreSkills as skills, skillCategories as categories } from '../../data/resumeData';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-const skills = [
-  { name: 'Swift', level: 95, desc: 'Language of the Apple ecosystem' },
-  { name: 'SwiftUI', level: 90, desc: 'Declarative UI at its finest' },
-  { name: 'UIKit', level: 85, desc: 'Precise programmatic layouts' },
-  { name: 'Core Data', level: 80, desc: 'Offline-first persistence' },
-  { name: 'ARKit / RealityKit', level: 75, desc: 'Spatial computing & AR' },
-  { name: 'Combine / RxSwift', level: 85, desc: 'Reactive data pipelines' },
-];
-
-const categories = [
-  {
-    label: 'Dev Tools',
-    items: ['Xcode', 'Instruments', 'Fastlane', 'Git', 'SPM', 'CocoaPods'],
-  },
-  {
-    label: 'Design & Data',
-    items: ['Figma', 'Firebase', 'Supabase', 'RevenueCat', 'PostHog'],
-  },
-  {
-    label: 'Domain',
-    items: ['WidgetKit', 'PushKit', 'StoreKit 2', 'ARKit', 'HealthKit'],
-  },
-];
 
 const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,32 +27,44 @@ const Skills = () => {
       {/* Animated ambient orb with horizontal parallax */}
       <motion.div
         style={{ x: orbX }}
-        className="orb w-[600px] h-[600px] right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-purple-600/[0.04]"
+        className="orb w-[600px] h-[600px] right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-[#7ac4ff]/[0.04]"
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Header with perspective-entry effect */}
-        <motion.div
-          style={{ rotateX: headerRotateX, transformPerspective: 1000 }}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mb-16"
-        >
-          <p className="section-label mb-4">Expertise</p>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight leading-tight mb-4">
-            What I work with
-          </h2>
-          <p className="text-subdued text-base max-w-md leading-relaxed">
-            Deeply fluent in Swift and Apple's native toolkit.
-            Fast at finding the right abstraction and shipping it.
-          </p>
-        </motion.div>
+        <div className="world-shell glass-card noise p-8 md:p-10 lg:p-12">
+          <motion.div
+            style={{ rotateX: headerRotateX, transformPerspective: 1000 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="mb-16 grid gap-8 lg:grid-cols-[1fr_0.82fr]"
+          >
+            <div>
+              <p className="section-label mb-4">Expertise</p>
+              <h2 className="font-display text-[clamp(2.4rem,5vw,4.1rem)] tracking-tight leading-[0.98] mb-4">
+                Tools, instincts, and systems that shape the work.
+              </h2>
+              <p className="text-subdued text-base max-w-xl leading-relaxed">
+                This isn’t a keyword dump. It’s the actual stack and product muscle behind how I build:
+                native interfaces, resilient integrations, and apps that feel intentional.
+              </p>
+            </div>
+            <div className="video-panel rounded-[28px] border border-white/10 p-6">
+              <div className="text-[10px] uppercase tracking-[0.22em] text-[#9ed1ff]">Working style</div>
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                {['Native-first', 'Fast iterations', 'Clear systems', 'Polished delivery'].map((item) => (
+                  <div key={item} className="rounded-2xl border border-white/8 bg-white/[0.04] px-4 py-4 text-sm text-white/82">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
-        <hr className="divider mb-16" />
+          <hr className="divider mb-16" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16">
           {/* ── Skill bars ── */}
           <div className="space-y-7">
             {skills.map((skill, i) => (
@@ -141,6 +130,7 @@ const Skills = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: ci * 0.1, ease: EASE }}
               >
+                <div className="video-panel rounded-[24px] border border-white/9 p-5">
                 <p className="section-label mb-4">{cat.label}</p>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map((item, ii) => (
@@ -163,9 +153,11 @@ const Skills = () => {
                     </motion.span>
                   ))}
                 </div>
+                </div>
               </motion.div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

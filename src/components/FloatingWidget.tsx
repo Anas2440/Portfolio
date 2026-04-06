@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Download, Linkedin, Mail, X } from "lucide-react";
+import resumePdf from "../../AnasParekh.pdf";
 
 const FloatingWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,20 +10,20 @@ const FloatingWidget = () => {
     {
       icon: Download,
       label: "Download Resume",
-      href: "/AnasParekh_iOS_Developer.pdf",
-      color: "bg-green-600 hover:bg-green-700",
+      href: resumePdf,
+      color: "linear-gradient(135deg, rgba(244,196,108,0.95), rgba(230,168,67,0.95))",
     },
     {
       icon: Mail,
       label: "Email Me",
       href: "mailto:anasparekh5@gmail.com",
-      color: "bg-blue-600 hover:bg-blue-700",
+      color: "linear-gradient(135deg, rgba(120,196,255,0.95), rgba(70,134,255,0.95))",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/anas-parekh-a6ab40242",
-      color: "bg-blue-700 hover:bg-blue-800",
+      color: "linear-gradient(135deg, rgba(52,108,255,0.95), rgba(34,66,158,0.95))",
     },
   ];
 
@@ -49,7 +50,11 @@ const FloatingWidget = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-full text-white shadow-lg transition-all duration-200 hover:shadow-xl ${action.color}`}
+                className="flex items-center space-x-3 px-4 py-3 rounded-full text-white shadow-lg transition-all duration-200 hover:shadow-xl"
+                style={{
+                  background: action.color,
+                  boxShadow: "0 16px 40px rgba(0,0,0,0.24)",
+                }}
               >
                 <action.icon className="h-5 w-5" />
                 <span className="text-sm font-medium whitespace-nowrap">
@@ -65,7 +70,10 @@ const FloatingWidget = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="p-4 bg-apple-blue hover:bg-blue-400 text-white rounded-full shadow-[0_0_20px_rgba(41,151,255,0.4)] transition-all duration-200 hover:shadow-[0_0_25px_rgba(41,151,255,0.6)]"
+        className="p-4 text-white rounded-full transition-all duration-200 border border-white/12 video-panel"
+        style={{
+          boxShadow: "0 18px 48px rgba(0,0,0,0.28)",
+        }}
       >
         {isOpen ? (
           <X className="h-6 w-6" />

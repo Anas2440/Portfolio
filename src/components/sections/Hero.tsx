@@ -7,9 +7,10 @@ import {
   useReducedMotion,
   useMotionValue,
 } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, MapPin, Mail, Briefcase } from 'lucide-react';
 import { SceneBlobs } from '../AnimatedBlob';
 import FloatingUIScene from '../FloatingUIScene';
+import { profile, stats } from '../../data/resumeData';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -29,13 +30,6 @@ const itemVariants = {
     transition: { duration: 0.8, ease: EASE },
   },
 };
-
-const stats = [
-  { value: '10+',  label: 'Apps Shipped' },
-  { value: '3+',   label: 'Years iOS' },
-  { value: '20+',  label: 'Happy Clients' },
-  { value: '10K+', label: 'Downloads' },
-];
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -102,107 +96,146 @@ const Hero = () => {
       </motion.div>
 
       {/* ════════════════════════════════════════
-          LAYER 2 — Floating UI chips + depth rings
-          (tilts with mouse, parallaxes on scroll)
-          ════════════════════════════════════════ */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          rotateX: tiltX,
-          rotateY: tiltY,
-          transformStyle: 'preserve-3d',
-          perspective: 1200,
-          opacity: useTransform(scrollYProgress, [0, 0.5], [1, 0]),
-        }}
-      >
-        <FloatingUIScene scrollYProgress={scrollYProgress} />
-      </motion.div>
-
-      {/* ════════════════════════════════════════
-          LAYER 3 — Hero text content
-          (different parallax speed → creates depth)
+          LAYER 2 — Hero content
           ════════════════════════════════════════ */}
       <motion.div
         style={{
           y: shouldReduceMotion ? 0 : springY,
           opacity: shouldReduceMotion ? 1 : springOpacity,
-          // Perspective tilt — slightly less than background
           rotateX: useTransform(tiltX, v => v * 0.4),
           rotateY: useTransform(tiltY, v => v * 0.4),
           transformStyle: 'preserve-3d',
         }}
-        className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center"
+        className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 md:pt-24"
       >
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center"
+          className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]"
         >
-          {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <span className="badge">
-              <Sparkles className="w-3 h-3" />
-              Available for new projects
-            </span>
-          </motion.div>
+          <div className="text-left">
+            <motion.div variants={itemVariants} className="mb-6">
+              <span className="badge">
+                <Sparkles className="w-3 h-3" />
+                Ahmedabad-based iOS developer
+              </span>
+            </motion.div>
 
-          {/* Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-[clamp(2.8rem,8vw,6.5rem)] font-bold tracking-[-0.03em] leading-[1.06] mb-7"
-            style={{ textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
-          >
-            <span className="text-gradient">Crafting iOS</span>
-            <br />
-            <span className="text-white/92">apps that matter.</span>
-          </motion.h1>
+            <motion.p
+              variants={itemVariants}
+              className="section-label mb-5"
+            >
+              Native iOS craftsmanship with shipping experience across social, fitness, AI, and enterprise apps
+            </motion.p>
 
-          {/* Sub */}
-          <motion.p
-            variants={itemVariants}
-            className="text-[1.05rem] leading-relaxed text-muted max-w-lg mx-auto mb-10"
-          >
-            Specializing in Swift &amp; SwiftUI — building high-performance,
-            pixel-perfect iOS applications deeply rooted in the Apple ecosystem.
-          </motion.p>
+            <motion.h1
+              variants={itemVariants}
+              className="font-display text-[clamp(3.2rem,9vw,7rem)] leading-[0.95] tracking-[-0.04em] mb-6"
+              style={{ textShadow: '0 10px 50px rgba(0,0,0,0.35)' }}
+            >
+              <span className="block text-[#f6efe0]">Built with taste.</span>
+              <span className="block text-gradient">Shipped for people.</span>
+            </motion.h1>
 
-          {/* CTAs */}
+            <motion.div
+              variants={itemVariants}
+              className="max-w-xl space-y-4"
+            >
+              <p className="text-lg md:text-[1.15rem] leading-relaxed text-subdued">
+                I design and build polished iPhone experiences in <span className="text-white/90">Swift</span> and <span className="text-white/90">UIKit</span>,
+                turning product ideas into fast, usable, and memorable mobile apps.
+              </p>
+              <p className="text-[0.98rem] leading-relaxed text-muted">
+                10+ apps shipped, 100K+ downloads, and hands-on work across BLE integration,
+                Firebase, REST APIs, real-time communication, and App Store delivery.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <a href="#projects" className="btn-primary group">
+                View selected work
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a href="#contact" className="btn-secondary">
+                Start a conversation
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-10 grid gap-3 sm:grid-cols-3"
+            >
+              <div className="glass-card noise p-4 rounded-2xl">
+                <div className="flex items-center gap-2 text-white/75">
+                  <Briefcase className="w-4 h-4 text-[#f4c46c]" />
+                  <span className="text-xs uppercase tracking-[0.18em]">Role</span>
+                </div>
+                <p className="mt-3 text-sm font-medium text-white/92">{profile.title}</p>
+              </div>
+              <div className="glass-card noise p-4 rounded-2xl">
+                <div className="flex items-center gap-2 text-white/75">
+                  <MapPin className="w-4 h-4 text-[#9ed1ff]" />
+                  <span className="text-xs uppercase tracking-[0.18em]">Base</span>
+                </div>
+                <p className="mt-3 text-sm font-medium text-white/92">{profile.location}</p>
+              </div>
+              <div className="glass-card noise p-4 rounded-2xl">
+                <div className="flex items-center gap-2 text-white/75">
+                  <Mail className="w-4 h-4 text-[#f4c46c]" />
+                  <span className="text-xs uppercase tracking-[0.18em]">Contact</span>
+                </div>
+                <p className="mt-3 text-sm font-medium text-white/92 break-all">{profile.email}</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4"
+            >
+              {stats.map((s) => (
+                <motion.div
+                  key={s.label}
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="rounded-[22px] border border-white/8 bg-white/[0.03] px-4 py-5"
+                >
+                  <div className="font-display text-3xl leading-none text-[#f6efe0]">{s.value}</div>
+                  <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/45">{s.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3"
+            className="relative h-[420px] sm:h-[500px] lg:h-[620px]"
+            style={{ transformStyle: 'preserve-3d' }}
           >
-            <a href="#projects" className="btn-primary group">
-              See my work
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a href="#contact" className="btn-secondary">
-              Get in touch
-            </a>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-20 flex flex-wrap justify-center gap-px"
-          >
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                whileHover={{ scale: 1.07, y: -2 }}
-                transition={{ duration: 0.2 }}
-                className={`flex flex-col items-center px-10 py-5 ${
-                  i < stats.length - 1 ? 'border-r border-white/[0.07]' : ''
-                }`}
-              >
-                <span className="text-[2rem] font-bold tracking-tight text-white">
-                  {s.value}
-                </span>
-                <span className="text-xs text-muted mt-0.5 font-medium tracking-wide">
-                  {s.label}
-                </span>
-              </motion.div>
-            ))}
+            <div className="absolute inset-0 rounded-[36px] border border-[#9ed1ff]/12 bg-[radial-gradient(circle_at_top,rgba(244,196,108,0.12),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] shadow-[0_30px_100px_rgba(0,0,0,0.35)]" />
+            <div className="absolute inset-5 rounded-[30px] border border-white/8 bg-[#08101b]/40 backdrop-blur-md" />
+            <div className="absolute inset-0 overflow-hidden rounded-[36px]">
+              <FloatingUIScene
+                scrollYProgress={scrollYProgress}
+                tiltX={tiltX}
+                tiltY={tiltY}
+                mouseX={mouseX}
+                mouseY={mouseY}
+              />
+            </div>
+            <div className="absolute left-6 right-6 top-6 flex items-center justify-between rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-md">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.22em] text-white/40">Currently shipping</div>
+                <div className="mt-1 text-sm font-medium text-white/88">Native iOS apps with product polish</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] uppercase tracking-[0.22em] text-white/40">Stack</div>
+                <div className="mt-1 text-sm font-medium text-[#f4c46c]">Swift, UIKit, Firebase</div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>

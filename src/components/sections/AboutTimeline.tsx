@@ -1,35 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Building2, Calendar } from 'lucide-react';
+import { Building2, Calendar, Radar, Sparkles } from 'lucide-react';
+import { experiences, profile } from '../../data/resumeData';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-const experiences = [
-  {
-    year: '2023 – Present',
-    role: 'Senior iOS Developer',
-    company: 'Tech Innovations Inc.',
-    current: true,
-    description:
-      'Leading a cross-functional iOS team delivering major SwiftUI migrations, AR feature launches, and a unified Combine-driven architecture. Reduced app start time by 40%.',
-  },
-  {
-    year: '2021 – 2023',
-    role: 'iOS Developer',
-    company: 'Mobile First Agency',
-    current: false,
-    description:
-      'Shipped 5+ client applications across HealthTech and E-commerce. Owned Firebase integration, Core Data schemas, and App Store review cycle end-to-end.',
-  },
-  {
-    year: '2019 – 2021',
-    role: 'Junior iOS Developer',
-    company: 'Startup Valley',
-    current: false,
-    description:
-      'Laid the foundation of my iOS craft — Swift fundamentals, REST API integration, Fastlane CI/CD pipelines, and iterating fast in an early-stage environment.',
-  },
-];
 
 const AboutTimeline = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -53,36 +27,61 @@ const AboutTimeline = () => {
       {/* Parallax orb */}
       <motion.div
         style={{ y: orbY }}
-        className="orb w-[500px] h-[500px] left-0 top-1/2 -translate-y-1/2 bg-apple-blue/[0.05] -translate-x-1/2"
+        className="orb w-[500px] h-[500px] left-0 top-1/2 -translate-y-1/2 bg-[#7ac4ff]/[0.06] -translate-x-1/2"
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Header with parallax */}
-        <motion.div
-          style={{ y: headerY }}
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mb-20"
-        >
-          <p className="section-label mb-4">Experience</p>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight leading-tight mb-4">
-            The Journey
-          </h2>
-          <p className="text-subdued text-lg max-w-md leading-relaxed">
-            A trail of products shipped, problems solved, and craft refined.
-          </p>
-        </motion.div>
+        <div className="world-shell glass-card noise p-8 md:p-10 lg:p-12">
+          <motion.div
+            style={{ y: headerY }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="mb-16 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]"
+          >
+            <div>
+              <p className="section-label mb-4">Experience</p>
+              <h2 className="font-display text-[clamp(2.4rem,5vw,4.2rem)] tracking-tight leading-[0.98] mb-5">
+                A journey that feels built, not pitched.
+              </h2>
+              <p className="text-subdued text-lg max-w-xl leading-relaxed">
+                I care about products that feel alive in the hand. This timeline is less about titles
+                and more about how my world of iOS development kept expanding through shipping,
+                systems thinking, and real product responsibility.
+              </p>
+            </div>
 
-        {/* Timeline */}
-        <div className="relative space-y-6">
+            <div className="video-panel rounded-[28px] border border-white/10 p-6">
+              <div className="flex items-center gap-2 text-[#f4c46c] text-xs uppercase tracking-[0.22em]">
+                <Radar className="w-4 h-4" />
+                Signal
+              </div>
+              <p className="mt-5 text-white/88 text-base leading-relaxed">
+                {profile.summary}
+              </p>
+              <div className="mt-6 space-y-3">
+                {[
+                  'Enterprise-grade iOS delivery',
+                  'Realtime communication and device integration',
+                  'Product-minded execution with design sensitivity',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3 text-sm text-white/72">
+                    <Sparkles className="w-4 h-4 mt-0.5 text-[#9ed1ff]" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="relative space-y-6">
           {/* Vertical rule */}
           <div className="absolute left-[19px] top-3 bottom-6 w-px bg-gradient-to-b from-apple-blue/50 via-white/10 to-transparent" />
 
           {experiences.map((exp, i) => (
             <motion.div
-              key={i}
+              key={`${exp.company}-${exp.year}`}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -114,7 +113,7 @@ const AboutTimeline = () => {
               </div>
 
               {/* Card */}
-              <div className="glass-card p-7 group">
+              <div className="glass-card noise p-7 group">
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                   <div>
                     {exp.current && (
@@ -134,9 +133,25 @@ const AboutTimeline = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted leading-[1.75]">{exp.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {exp.highlights.map((highlight) => (
+                    <span
+                      key={highlight}
+                      className="px-3 py-1.5 rounded-full text-[11px] font-medium"
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        color: 'rgba(255,255,255,0.62)',
+                      }}
+                    >
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
+        </div>
         </div>
       </div>
     </section>

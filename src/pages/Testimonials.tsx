@@ -190,6 +190,8 @@ const Testimonials = () => {
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-16 h-16 rounded-full object-cover"
                   />
                   <div>
@@ -259,6 +261,8 @@ const Testimonials = () => {
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
@@ -319,6 +323,8 @@ const Testimonials = () => {
                 <img
                   src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100"
                   alt="Alex Thompson"
+                  loading="lazy"
+                  decoding="async"
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div className="text-left">

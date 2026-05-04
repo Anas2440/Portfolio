@@ -32,6 +32,7 @@ export const experiences = [
       'Implemented BLE controller scanning, pairing, connection state handling, and live data streaming.',
       'Developed socket communication, subscription flows, and feature-based access control modules.',
       'Integrated REST APIs and backend services for reliable synchronization and app performance.',
+      'Worked with real-time data pipelines and API-driven flows requiring background thread management and reliable state sync.',
       'Worked in Agile cycles with daily progress updates and weekly deliverable planning.',
     ],
   },
@@ -53,6 +54,15 @@ export const experiences = [
 ];
 
 export const projects = [
+  {
+    title: 'CalmTrade',
+    type: 'FINTECH · WELLNESS',
+    description:
+      'A trading wellness platform for day traders combining biometric data, HealthKit integration, real-time broker sync, and performance journaling.',
+    tags: ['CoreData', 'Polar SDK', 'BLE', 'Socket.IO', 'REST APIs', 'SwiftUI'],
+    accent: 'rgba(122,196,255,0.08)',
+    highlight: '#7ac4ff',
+  },
   {
     title: 'First Face',
     type: 'Fashion Operations',
@@ -132,6 +142,7 @@ export const coreSkills = [
   { name: 'UIKit', level: 92, desc: 'Production UI architecture and custom interfaces' },
   { name: 'Xcode', level: 92, desc: 'Day-to-day development, debugging, and shipping' },
   { name: 'Combine', level: 84, desc: 'Reactive state and event handling in iOS apps' },
+  { name: 'Swift Concurrency', level: 78, desc: 'async/await, actors, and structured concurrency' },
   { name: 'Firebase', level: 86, desc: 'Realtime features, auth, and backend-connected workflows' },
   { name: 'BLE Integration', level: 82, desc: 'Sensor connectivity, pairing, and live data handling' },
 ];
@@ -139,7 +150,7 @@ export const coreSkills = [
 export const skillCategories = [
   {
     label: 'iOS Stack',
-    items: ['Swift', 'UIKit', 'Xcode', 'CocoaPods', 'MVC', 'Combine Framework'],
+    items: ['Swift', 'UIKit', 'SwiftUI', 'Xcode', 'CocoaPods', 'MVC', 'Combine', 'async/await', 'GCD'],
   },
   {
     label: 'Backend & Device',

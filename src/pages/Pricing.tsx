@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, X, Star, ArrowRight, Zap, Crown, Rocket } from 'lucide-react';
+import { Check, X, ArrowRight, Zap, Crown, Rocket } from 'lucide-react';
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);

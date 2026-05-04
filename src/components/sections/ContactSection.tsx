@@ -1,9 +1,7 @@
-import React, { useState, useId } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, Linkedin, Mail, ArrowUpRight, Phone, Globe, MapPin } from 'lucide-react';
+import React, { useId, useState } from 'react';
+import { ArrowUpRight, CheckCircle2, Globe, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
+import Reveal from '../Reveal';
 import { profile } from '../../data/resumeData';
-
-const EASE = [0.16, 1, 0.3, 1] as const;
 
 const socials = [
   { label: 'LinkedIn', href: profile.linkedin, icon: Linkedin },
@@ -19,141 +17,106 @@ const ContactSection = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [formState, setFormState] = useState<FormState>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     setFormState('loading');
-    setTimeout(() => {
+    window.setTimeout(() => {
       setFormState('success');
       setForm({ name: '', email: '', message: '' });
-    }, 1600);
+    }, 1200);
   };
 
   return (
-    <section id="contact" className="py-28 relative overflow-hidden">
-      {/* Ambient */}
-      <div className="orb w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4c46c]/[0.06]" />
+    <section id="contact" className="relative overflow-hidden py-28">
+      <div className="orb left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[#f4c46c]/[0.06]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="world-shell glass-card noise p-8 md:p-10 lg:p-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-start">
-          
-          {/* ── Left column: copy ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-          >
-            <p className="section-label mb-4">Contact</p>
-            <h2 className="font-display text-[clamp(2.4rem,5vw,4rem)] tracking-tight leading-[0.98] mb-5">
-              Enter the conversation, not the funnel.
-            </h2>
-            <p className="text-subdued text-base leading-relaxed mb-10 max-w-sm">
-              Based in {profile.location}. If you have an iOS product, client build, or collaboration idea,
-              let’s make it feel honest, alive, and beautifully built.
-            </p>
+          <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-24">
+            <Reveal>
+              <p className="section-label mb-4">Contact</p>
+              <h2 className="font-display mb-5 text-[clamp(2.4rem,5vw,4rem)] leading-[0.98] tracking-tight">
+                Enter the conversation, not the funnel.
+              </h2>
+              <p className="mb-10 max-w-sm text-base leading-relaxed text-subdued">
+                Based in {profile.location}. If you have an iOS product, client build, or collaboration idea,
+                let’s make it feel honest, alive, and beautifully built.
+              </p>
 
-            <div className="mb-8 space-y-3">
-              <div className="flex items-center gap-3 text-sm text-white/75">
-                <MapPin className="w-4 h-4 text-apple-blue/80" />
-                <span>{profile.location}</span>
+              <div className="mb-8 space-y-3">
+                <div className="flex items-center gap-3 text-sm text-white/75">
+                  <MapPin className="h-4 w-4 text-apple-blue/80" />
+                  <span>{profile.location}</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/75">
+                  <Mail className="h-4 w-4 text-apple-blue/80" />
+                  <span>{profile.email}</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/75">
+                  <Phone className="h-4 w-4 text-apple-blue/80" />
+                  <span>{profile.phone}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-sm text-white/75">
-                <Mail className="w-4 h-4 text-apple-blue/80" />
-                <span>{profile.email}</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-white/75">
-                <Phone className="w-4 h-4 text-apple-blue/80" />
-                <span>{profile.phone}</span>
-              </div>
-            </div>
 
-            {/* Socials */}
-            <div className="space-y-3">
-              {socials.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between px-4 py-3 rounded-xl group transition-colors duration-200 video-panel border border-white/10"
-                  style={{
-                    boxShadow: '0 14px 40px rgba(0,0,0,0.18)',
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                      style={{ background: 'rgba(255,255,255,0.07)' }}>
-                      <Icon className="w-4 h-4 text-white/70" />
-                    </div>
-                    <span className="text-sm font-medium text-white/80 group-hover:text-white transition-colors">
-                      {label}
-                    </span>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-apple-blue transition-colors" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── Right column: form ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          >
-            <div
-              className="video-panel rounded-[30px] p-8 sm:p-10 relative overflow-hidden border border-white/10"
-              style={{
-                boxShadow: '0 20px 70px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.04) inset',
-              }}
-            >
-              {/* Top glow line */}
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-apple-blue/40 to-transparent" />
-
-              <AnimatePresence mode="wait">
-                {formState === 'success' ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease: EASE }}
-                    className="flex flex-col items-center justify-center py-16 text-center"
+              <div className="space-y-3">
+                {socials.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="video-panel flex min-h-[44px] items-center justify-between rounded-xl border border-white/10 px-4 py-3 transition-colors duration-200"
+                    style={{ boxShadow: '0 14px 40px rgba(0,0,0,0.18)' }}
                   >
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
-                      style={{ background: 'rgba(52,211,153,0.15)', border: '1px solid rgba(52,211,153,0.3)' }}>
-                      <CheckCircle2 className="w-7 h-7 text-emerald-400" />
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/7">
+                        <Icon className="h-4 w-4 text-white/70" />
+                      </div>
+                      <span className="text-sm font-medium text-white/80 transition-colors duration-200 hover:text-white">
+                        {label}
+                      </span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Message sent!</h3>
-                    <p className="text-muted text-sm">I'll get back to you within 24 hours.</p>
+                    <ArrowUpRight className="h-4 w-4 text-muted transition-colors duration-200 hover:text-apple-blue" />
+                  </a>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal direction="right" delay={100}>
+              <div
+                className="video-panel relative overflow-hidden rounded-[30px] border border-white/10 p-8 sm:p-10"
+                style={{
+                  boxShadow: '0 20px 70px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.04) inset',
+                }}
+              >
+                <div className="absolute left-8 right-8 top-0 h-px bg-gradient-to-r from-transparent via-apple-blue/40 to-transparent" />
+
+                {formState === 'success' ? (
+                  <div className="flex flex-col items-center justify-center py-16 text-center">
+                    <div
+                      className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/15"
+                    >
+                      <CheckCircle2 className="h-7 w-7 text-emerald-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Message sent!</h3>
+                    <p className="mt-2 text-sm text-muted">I'll get back to you within 24 hours.</p>
                     <button
                       onClick={() => setFormState('idle')}
-                      className="mt-8 text-xs text-muted hover:text-white underline underline-offset-4 transition-colors"
+                      className="mt-8 min-h-[44px] text-xs text-muted underline underline-offset-4 transition-colors duration-200 hover:text-white"
                     >
                       Send another message
                     </button>
-                  </motion.div>
+                  </div>
                 ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="space-y-5"
-                  >
-                    {/* Name + Email row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       {(['name', 'email'] as const).map((field) => (
                         <div key={field} className="space-y-1.5">
-                          <label
-                            htmlFor={`${id}-${field}`}
-                            className="text-xs font-semibold tracking-wide uppercase text-muted"
-                          >
+                          <label htmlFor={`${id}-${field}`} className="text-xs font-semibold uppercase tracking-wide text-muted">
                             {field === 'name' ? 'Full name' : 'Email'}
                           </label>
                           <input
@@ -164,30 +127,14 @@ const ContactSection = () => {
                             value={form[field]}
                             onChange={handleChange}
                             placeholder={field === 'name' ? 'Anas Parekh' : 'you@domain.com'}
-                            className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/25 outline-none transition-all duration-200"
-                            style={{
-                              background: 'rgba(255,255,255,0.05)',
-                              border: '1px solid rgba(255,255,255,0.09)',
-                            }}
-                            onFocus={e => {
-                              e.currentTarget.style.borderColor = 'rgba(41,151,255,0.6)';
-                              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(41,151,255,0.1)';
-                            }}
-                            onBlur={e => {
-                              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)';
-                              e.currentTarget.style.boxShadow = 'none';
-                            }}
+                            className="contact-input w-full rounded-xl px-4 py-3 text-sm text-white outline-none placeholder:text-white/25"
                           />
                         </div>
                       ))}
                     </div>
 
-                    {/* Message */}
                     <div className="space-y-1.5">
-                      <label
-                        htmlFor={`${id}-message`}
-                        className="text-xs font-semibold tracking-wide uppercase text-muted"
-                      >
+                      <label htmlFor={`${id}-message`} className="text-xs font-semibold uppercase tracking-wide text-muted">
                         Message
                       </label>
                       <textarea
@@ -198,58 +145,33 @@ const ContactSection = () => {
                         value={form.message}
                         onChange={handleChange}
                         placeholder="Tell me about your project…"
-                        className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/25 outline-none resize-none transition-all duration-200"
-                        style={{
-                          background: 'rgba(255,255,255,0.05)',
-                          border: '1px solid rgba(255,255,255,0.09)',
-                        }}
-                        onFocus={e => {
-                          e.currentTarget.style.borderColor = 'rgba(41,151,255,0.6)';
-                          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(41,151,255,0.1)';
-                        }}
-                        onBlur={e => {
-                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)';
-                          e.currentTarget.style.boxShadow = 'none';
-                        }}
+                        className="contact-input w-full resize-none rounded-xl px-4 py-3 text-sm text-white outline-none placeholder:text-white/25"
                       />
                     </div>
 
-                    {/* Submit */}
-                    <motion.button
+                    <button
                       type="submit"
                       disabled={formState === 'loading'}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-[15px] transition-all duration-200 disabled:opacity-60"
-                      style={{
-                        background: '#fff',
-                        color: '#000',
-                        boxShadow: '0 0 0 1px rgba(255,255,255,0.12) inset',
-                      }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.88)'; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#fff'; }}
+                      className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-white py-3.5 text-[15px] font-semibold text-black transition-all duration-200 disabled:opacity-60"
+                      style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.12) inset' }}
                     >
                       {formState === 'loading' ? (
                         <>
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ repeat: Infinity, duration: 0.8, ease: 'linear' }}
-                            className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full"
-                          />
+                          <span className="loading-spinner h-4 w-4 rounded-full border-2 border-black/30 border-t-black" />
                           Sending…
                         </>
                       ) : (
                         <>
                           Send message
-                          <Send className="w-4 h-4" />
+                          <Send className="h-4 w-4" />
                         </>
                       )}
-                    </motion.button>
-                  </motion.form>
+                    </button>
+                  </form>
                 )}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

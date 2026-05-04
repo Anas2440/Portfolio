@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Smartphone, Cuboid as Cube, Database, Palette, Store, CreditCard, Wifi, CheckCircle, ArrowRight, Star, Clock, Users } from 'lucide-react';
+import { Smartphone, Cuboid as Cube, Database, Palette, Store, CreditCard, Wifi, CheckCircle, ArrowRight, Star, Clock } from 'lucide-react';
 
 const Services = () => {
   const services = [

@@ -6,8 +6,30 @@ import { ArrowLeft, ExternalLink, Github, Calendar, User, Target, Lightbulb, Che
 const ProjectDetail = () => {
   const { id } = useParams();
 
+  type ProjectDetails = {
+    title: string;
+    category: string;
+    description: string;
+    longDescription: string;
+    image: string;
+    technologies: string[];
+    duration: string;
+    role: string;
+    appStoreUrl: string;
+    githubUrl: string;
+    gallery: string[];
+    challenges: string[];
+    features: string[];
+    outcomes: string[];
+    testimonial?: {
+      text: string;
+      author: string;
+      role: string;
+    };
+  };
+
   // Mock data - in real app, fetch from API
-  const projectData: any = {
+  const projectData: Record<string, ProjectDetails> = {
     'ar-furniture': {
       title: 'AR Furniture Placement',
       category: 'AR',
@@ -134,6 +156,8 @@ const ProjectDetail = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full rounded-lg shadow-2xl"
                 />
               </div>
@@ -184,6 +208,8 @@ const ProjectDetail = () => {
                 <img
                   src={image}
                   alt={`${project.title} screenshot ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
               </motion.div>

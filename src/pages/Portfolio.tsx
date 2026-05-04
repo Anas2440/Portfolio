@@ -162,6 +162,8 @@ const Portfolio = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -235,6 +237,8 @@ const Portfolio = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-36 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-3 right-3">

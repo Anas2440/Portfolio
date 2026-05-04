@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowRight, Search, Tag, TrendingUp, BookOpen, Code } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Search, Tag, TrendingUp, BookOpen } from 'lucide-react';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -181,6 +181,8 @@ const Blog = () => {
                     <img
                       src={post.image}
                       alt={post.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
@@ -259,6 +261,8 @@ const Blog = () => {
                   <img
                     src={post.image}
                     alt={post.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-36 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-3 left-3">
